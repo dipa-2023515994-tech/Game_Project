@@ -1,0 +1,19 @@
+CC = g++
+CFLAGS = -Wall -g
+LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+SOURCES = main.cpp game_utils.cpp game_objects.cpp game_state.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+EXECUTABLE = hp_runner
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJECTS) $(EXECUTABLE)
+
+.PHONY: all clean
